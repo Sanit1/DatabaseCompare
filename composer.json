@@ -1,0 +1,29 @@
+{
+    "name": "sanit/databasecompare",
+    "description": "compare two or more database",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sanit",
+            "email": "982341320@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "repositories": [
+        {
+
+            "type": "git",
+
+            "url": "https://github.com/Sanit1/DatabaseCompare.git"
+
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DatabaseCompare\\": "src/"
+        },
+        "files":["src/config/config.php"]
+    }
+}
