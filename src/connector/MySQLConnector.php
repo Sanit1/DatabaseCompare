@@ -28,10 +28,8 @@ class MySQLConnector extends Connection
         return $dsn;
     }
 
-    public function getTables($dbName)
+    public function getTables($dbName='')
     {
-        return ['1
-        '];
         // TODO: Implement getTables() method.
         $this->initConnect();
         $sql = !empty($dbName) ? 'SHOW TABLES FROM ' . $dbName : 'SHOW TABLES ';
@@ -52,11 +50,11 @@ class MySQLConnector extends Connection
             throw new \PDOException('表名字无法为空');
         }
         $sql = 'DESC '.$tableName;
-        $pdo = $this->linkID->execute($sql);
+        $pdo = $this->linkID->query($sql);
         $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
         $info = [];
         foreach ($result as $key => $val) {
-            $info[$key] = current($val);
+            $info[$key] = $val;
         }
         return $info;
     }
