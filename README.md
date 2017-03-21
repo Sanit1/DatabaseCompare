@@ -1,10 +1,10 @@
 # DatabaseCompare
 比较两个或者两个以上的数据库
-___
+</br>
 目前对于两个以上的数据库的比较还没完善
 
 # 用法
-composer install "sanit/databasecompare";
+composer require "sanit/databasecompare";
 
 然后再在config里面配置好你的数据库信息,然后就能用了,目前只能简单的比较两张表结构是否相同;
 具体用法请看index.php
