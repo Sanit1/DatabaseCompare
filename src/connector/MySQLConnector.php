@@ -13,7 +13,7 @@ use DatabaseCompare\Connection;
 
 class MySQLConnector extends Connection
 {
-    public  function parseDsn($config)
+    public function parseDsn($config)
     {
         // TODO: Implement parseDsn() method.
         $dsn = 'mysql:dbname=' . $config['database'] . ';host=' . $config['hostname'];
@@ -28,28 +28,37 @@ class MySQLConnector extends Connection
         return $dsn;
     }
 
-    public function getTables($dbName='')
+    public function getTables($dbName = '')
     {
         // TODO: Implement getTables() method.
         $this->initConnect();
         $sql = !empty($dbName) ? 'SHOW TABLES FROM ' . $dbName : 'SHOW TABLES ';
         $pdo = $this->linkID->query($sql);
         $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
-        $info   = [];
+        $info = [];
         foreach ($result as $key => $val) {
             $info[$key] = current($val);
         }
         return $info;
     }
 
-    public function getTableStructure($tableName)
+    public function getTableStructure($tableName, $baseDb)
     {
         // TODO: Implement getTableStructure() method.
         $this->initConnect();
-        if(empty($tableName)){
+        if (empty($tableName)) {
             throw new \PDOException('表名字无法为空');
         }
-        $sql = 'DESC '.$tableName;
+        $tablesStr = '';
+        foreach ($tableName as $key => $value) {
+            if ($key == 0) {
+                $tablesStr = $tablesStr . "'" . $value . "'";
+            } else {
+                $tablesStr = $tablesStr . ',' . "'" . $value . "'";
+            }
+        }
+        $sql = "SELECT TABLE_NAME, COLUMN_NAME, COLUMN_DEFAULT, IS_NULLABLE, COLUMN_TYPE, COLUMN_COMMENT, COLUMN_KEY, COLLATION_NAME
+ FROM `COLUMNS` WHERE `TABLE_NAME` IN (" . $tablesStr . ") AND TABLE_SCHEMA = " . "'" . $baseDb . "'";
         $pdo = $this->linkID->query($sql);
         $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
         $info = [];

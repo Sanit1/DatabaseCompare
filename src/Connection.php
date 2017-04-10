@@ -42,25 +42,25 @@ abstract class Connection
      */
     protected $config = [
         // 数据库类型
-        'type'           => '',
+        'type' => '',
         // 服务器地址
-        'hostname'       => '',
+        'hostname' => '',
         // 数据库名
-        'database'       => '',
+        'database' => '',
         // 用户名
-        'username'       => '',
+        'username' => '',
         // 密码
-        'password'       => '',
+        'password' => '',
         // 端口
-        'hostport'       => '',
+        'hostport' => '',
         // 连接dsn
-        'dsn'            => '',
+        'dsn' => '',
         // 数据库连接参数
-        'params'         => [],
+        'params' => [],
         // 数据库编码默认采用utf8
-        'charset'        => 'utf8',
+        'charset' => 'utf8',
         // 数据库表前缀
-        'prefix'         => '',
+        'prefix' => '',
     ];
 
     /**
@@ -68,17 +68,17 @@ abstract class Connection
      * @var array
      */
     protected $params = [
-        PDO::ATTR_CASE              => PDO::CASE_NATURAL,
-        PDO::ATTR_ERRMODE           => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
+        PDO::ATTR_CASE => PDO::CASE_NATURAL,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_ORACLE_NULLS => PDO::NULL_NATURAL,
         PDO::ATTR_STRINGIFY_FETCHES => false,
-        PDO::ATTR_EMULATE_PREPARES  => false,
+        PDO::ATTR_EMULATE_PREPARES => false,
     ];
 
     public function __construct(array $config = [])
     {
-        if(!empty($config)){
-            $this->config = array_merge($this->config,$config);
+        if (!empty($config)) {
+            $this->config = array_merge($this->config, $config);
         }
     }
 
@@ -86,7 +86,7 @@ abstract class Connection
 
     abstract public function getTables($dbName);
 
-    abstract public function getTableStructure($tableName);
+    abstract public function getTableStructure($tableName, $baseDb);
 
     /**
      * 连接数据库
@@ -148,8 +148,8 @@ abstract class Connection
     /**
      * 设置数据库的配置参数
      * @access public
-     * @param string|array      $config 配置名称
-     * @param mixed             $value 配置值
+     * @param string|array $config 配置名称
+     * @param mixed $value 配置值
      * @return void
      */
     public function setConfig($config, $value = '')
@@ -170,6 +170,7 @@ abstract class Connection
         // 关闭连接
         $this->close();
     }
+
     public function free()
     {
         $this->PDOStatement = null;
@@ -197,9 +198,9 @@ abstract class Connection
     /**
      * 执行查询 返回数据集
      * @access public
-     * @param string        $sql sql指令
-     * @param array         $bind 参数绑定
-     * @param bool|string   $class 指定返回的数据集对象
+     * @param string $sql sql指令
+     * @param array $bind 参数绑定
+     * @param bool|string $class 指定返回的数据集对象
      * @return mixed
      * @throws \PDOException
      */
@@ -209,13 +210,10 @@ abstract class Connection
         if (!$this->linkID) {
             return false;
         }
-        // 根据参数绑定组装最终的SQL语句$sql
-
         //释放前次的查询结果
         if (!empty($this->PDOStatement)) {
             $this->free();
         }
-
         try {
             // 预处理
             $this->PDOStatement = $this->linkID->prepare($sql);
@@ -231,8 +229,8 @@ abstract class Connection
     /**
      * 执行语句
      * @access public
-     * @param string        $sql sql指令
-     * @param array         $bind 参数绑定
+     * @param string $sql sql指令
+     * @param array $bind 参数绑定
      * @return int
      * @throws BindParamException
      * @throws PDOException

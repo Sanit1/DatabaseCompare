@@ -12,13 +12,13 @@ $database =
         [
             'type'           => 'mysql',
             // 服务器地址
-            'hostname'       => '',//'svn.98school.com',
+            'hostname'       => '115.28.231.211',
             // 数据库名
-            'database'       => '',
+            'database'       => 'work',
             // 用户名
-            'username'       => '',
+            'username'       => 'root',
             // 密码
-            'password'       => '',
+            'password'       => 'hangzhou123',
             // 端口
             'hostport'       => '',
             // 连接dsn
@@ -28,20 +28,20 @@ $database =
             // 数据库编码默认采用utf8
             'charset'        => 'utf8mb4',
             // 数据库表前缀
-            'prefix'         => 'ad_',
+            'prefix'         => '',
 
         ],
-        //db2 如果还要加数据库自己再在后面加数组
+        //db2
         [
             'type'           => 'mysql',
             // 服务器地址
-            'hostname'       => '',
+            'hostname'       => '115.28.231.211',
             // 数据库名
-            'database'       => '',
+            'database'       => 'test',
             // 用户名
-            'username'       => '',
+            'username'       => 'root',
             // 密码
-            'password'       => '',
+            'password'       => 'hangzhou123',
             // 端口
             'hostport'       => '',
             // 连接dsn

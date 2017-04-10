@@ -6,11 +6,11 @@
  * Time: 20:55
  */
 
-require  './vendor/autoload.php';
+require './vendor/autoload.php';
 require './src/config/config.php';
 
 use DatabaseCompare\Compare\Compare;
 
 $result = new Compare($database);
 
-echo (json_encode($result->compareResult()));
+echo(json_encode($result->compareResult()));
