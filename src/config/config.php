@@ -12,13 +12,13 @@ $database =
         [
             'type'           => 'mysql',
             // 服务器地址
-            'hostname'       => '115.28.231.211',
+            'hostname'       => '',
             // 数据库名
-            'database'       => 'work',
+            'database'       => '',
             // 用户名
-            'username'       => 'root',
+            'username'       => '',
             // 密码
-            'password'       => 'hangzhou123',
+            'password'       => '',
             // 端口
             'hostport'       => '',
             // 连接dsn
@@ -35,13 +35,13 @@ $database =
         [
             'type'           => 'mysql',
             // 服务器地址
-            'hostname'       => '115.28.231.211',
+            'hostname'       => '',
             // 数据库名
-            'database'       => 'test',
+            'database'       => '',
             // 用户名
-            'username'       => 'root',
+            'username'       => '',
             // 密码
-            'password'       => 'hangzhou123',
+            'password'       => '',
             // 端口
             'hostport'       => '',
             // 连接dsn

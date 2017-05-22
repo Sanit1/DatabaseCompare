@@ -51,12 +51,11 @@ class MySQLConnector extends Connection
         }
         $tablesStr = '';
         foreach ($tableName as $key => $value) {
-            if ($key == 0) {
-                $tablesStr = $tablesStr . "'" . $value . "'";
-            } else {
-                $tablesStr = $tablesStr . ',' . "'" . $value . "'";
+            if(!empty($value)) {
+                $tablesStr = $tablesStr . "'" . $value . "'".",";
             }
         }
+        $tablesStr = substr($tablesStr,0,strlen($tablesStr)-1);
         $sql = "SELECT TABLE_NAME, COLUMN_NAME, COLUMN_DEFAULT, IS_NULLABLE, COLUMN_TYPE, COLUMN_COMMENT, COLUMN_KEY, COLLATION_NAME
  FROM `COLUMNS` WHERE `TABLE_NAME` IN (" . $tablesStr . ") AND TABLE_SCHEMA = " . "'" . $baseDb . "'";
         $pdo = $this->linkID->query($sql);
